@@ -33,19 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var chatBar = ChatBar(widget.title);
-    var chats = Chats();
     var bottom = Bottom();
     return Scaffold(
       appBar: chatBar.buildAppbar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: chats.listChats(),
-            ),
-          ],
-        ),
+        child: Chats(),
       ),
       bottomNavigationBar: bottom.bottomNavigationBar(),
     );
