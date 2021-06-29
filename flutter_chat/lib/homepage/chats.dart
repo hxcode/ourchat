@@ -27,7 +27,6 @@ class Chats {
           _tile('curry', '3117 16th St', Icons.person),
           _tile('durant', '501 Buckingham Way', Icons.person),
           _tile('Jordan', '135 4th St #3000', Icons.person),
-          Divider(),
           _tile('sara', '757 Monterey Blvd', Icons.person),
           _tile('turk', '1923 Ocean Ave', Icons.person),
           _tile('burd ', '272 Claremont Blvd', Icons.person),

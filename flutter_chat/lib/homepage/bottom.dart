@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
 
 class Bottom {
+  int _selectedIndex = 0;
   Bottom() {}
-
-  Widget listBottom() => Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                Icon(Icons.message),
-                Text('Chats'),
-              ],
+  void _onItemTapped(int index) {}
+  BottomNavigationBar bottomNavigationBar() => BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.lightGreen,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.message,
+              color: Colors.black,
             ),
-            Column(
-              children: [
-                Icon(Icons.people),
-                Text('Contacts'),
-              ],
+            label: "Chats",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.people,
+              color: Colors.black,
             ),
-            Column(
-              children: [
-                Icon(Icons.child_care_outlined),
-                Text('Discover'),
-              ],
+            label: "Contacts",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.child_care_outlined,
+              color: Colors.black,
             ),
-            Column(
-              children: [
-                Icon(Icons.person),
-                Text('Me'),
-              ],
+            label: "Discover",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: Colors.black,
             ),
-          ],
-        ),
+            label: "Me",
+          ),
+        ],
       );
 }

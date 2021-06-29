@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/homepage/bottom.dart';
-import 'package:flutter_chat/homepage/topbar.dart';
+import 'package:flutter_chat/homepage/appbar.dart';
 import 'package:flutter_chat/homepage/chats.dart';
 
 void main() {
@@ -42,14 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              flex: 9,
               child: chats.listChats(),
             ),
-            Divider(),
-            bottom.listBottom(),
           ],
         ),
       ),
+      bottomNavigationBar: bottom.bottomNavigationBar(),
     );
   }
 }
