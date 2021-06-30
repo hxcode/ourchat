@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat/singlechat/singlechat.dart';
 
 class Chats extends StatefulWidget {
   @override
   _ChatsState createState() => _ChatsState();
+}
+
+Route _createRoute(String contactName) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => SingleChat(
+      contactName: contactName,
+    ),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }
 
 class _ChatsState extends State<Chats> {
@@ -21,6 +33,9 @@ class _ChatsState extends State<Chats> {
           '18:30',
           style: TextStyle(color: Colors.grey),
         ),
+        onTap: () {
+          Navigator.of(context).push(_createRoute(title));
+        },
       );
   @override
   Widget build(BuildContext context) {

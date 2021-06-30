@@ -17,15 +17,16 @@ class ChatBar {
             letterSpacing: 0.5,
           ),
         ),
+        actionsIconTheme: IconThemeData(
+          color: Colors.black,
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            color: Colors.black,
             onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.add_circle_outline_rounded),
-            color: Colors.black,
             onPressed: () {},
           ),
         ],
