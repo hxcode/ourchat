@@ -8,18 +8,10 @@ class SingleChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         toolbarHeight: 40,
         title: Text(
           contactName,
           style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        actionsIconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.black,
         ),
         actions: [
           IconButton(
@@ -53,6 +45,11 @@ class SingleChat extends StatelessWidget {
                     style: TextStyle(height: 1.8),
                     showCursor: true,
                     maxLines: null,
+                    onChanged: (String value) async {
+                      if (value.isNotEmpty) {
+                        //TODO: replace add button with send
+                      }
+                    },
                     decoration: InputDecoration.collapsed(
                       hintText: "",
                       border: OutlineInputBorder(

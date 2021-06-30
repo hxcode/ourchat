@@ -6,9 +6,7 @@ class ChatBar {
   ChatBar(this.title) {}
 
   AppBar buildAppbar() => AppBar(
-        centerTitle: true,
         toolbarHeight: 48.0,
-        backgroundColor: Colors.white70,
         title: Text(
           title,
           style: TextStyle(
@@ -16,9 +14,6 @@ class ChatBar {
             fontFamily: 'Roboto',
             letterSpacing: 0.5,
           ),
-        ),
-        actionsIconTheme: IconThemeData(
-          color: Colors.black,
         ),
         actions: [
           IconButton(

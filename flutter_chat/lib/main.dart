@@ -14,6 +14,16 @@ class MyApp extends StatelessWidget {
       title: 'OurChat',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.white70,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          actionsIconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+        ),
       ),
       home: MyHomePage(title: 'OurChat'),
     );

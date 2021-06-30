@@ -39,19 +39,26 @@ class _ChatsState extends State<Chats> {
       );
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        _tile('Ivy', '85 W Portal Ave', Icons.person),
-        _tile('Oliver ', '272 Claremont Blvd', Icons.person),
-        _tile('Kobe', '429 Castro St', Icons.person),
-        _tile('James', '2550 Mission St', Icons.person),
-        _tile('curry', '3117 16th St', Icons.person),
-        _tile('durant', '501 Buckingham Way', Icons.person),
-        _tile('Jordan', '135 4th St #3000', Icons.person),
-        _tile('sara', '757 Monterey Blvd', Icons.person),
-        _tile('turk', '1923 Ocean Ave', Icons.person),
-        _tile('Davis', '291 30th St', Icons.person),
-      ],
+    var chatList = [
+      _tile('Ivy', '85 W Portal Ave', Icons.person),
+      _tile('Oliver ', '272 Claremont Blvd', Icons.person),
+      _tile('Kobe', '429 Castro St', Icons.person),
+      _tile('James', '2550 Mission St', Icons.person),
+      _tile('curry', '3117 16th St', Icons.person),
+      _tile('durant', '501 Buckingham Way', Icons.person),
+      _tile('Jordan', '135 4th St #3000', Icons.person),
+      _tile('sara', '757 Monterey Blvd', Icons.person),
+      _tile('turk', '1923 Ocean Ave', Icons.person),
+      _tile('Davis', '291 30th St', Icons.person),
+    ];
+    return ListView.separated(
+      itemCount: chatList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return chatList[index];
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(
+        height: 1,
+      ),
     );
   }
 }

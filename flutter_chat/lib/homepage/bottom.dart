@@ -12,14 +12,14 @@ class Bottom {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.message,
+              Icons.message_outlined,
               color: Colors.black,
             ),
             label: "Chats",
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.people,
+              Icons.people_outline,
               color: Colors.black,
             ),
             label: "Contacts",
@@ -33,7 +33,7 @@ class Bottom {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.person_outline,
               color: Colors.black,
             ),
             label: "Me",
