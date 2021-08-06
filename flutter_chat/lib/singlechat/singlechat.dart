@@ -22,7 +22,14 @@ class SingleChat extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        child: Text(" Chat here!"),
+        child: StreamBuilder<int>(
+            initialData: 23,
+            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              if (!snapshot.hasData) {
+                return CircularProgressIndicator();
+              }
+              return Text(snapshot.data.toString());
+            }),
       ),
       bottomNavigationBar: StickyBottomAppBar(
         child: BottomAppBar(
