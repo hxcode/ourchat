@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ChatBar {
+class NbPersonBar {
   String title;
 
-  ChatBar(this.title) {}
+  NbPersonBar(this.title) {}
 
   AppBar buildAppbar() => AppBar(
         toolbarHeight: 48.0,

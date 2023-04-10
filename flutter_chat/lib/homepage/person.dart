@@ -4,6 +4,8 @@ import 'package:flutter_chat/model/person.dart';
 import 'package:flutter_chat/util/sqlitedb.dart';
 
 class NbPerson extends StatefulWidget {
+  final String searchValue;
+  NbPerson({required this.searchValue});
   @override
   _NbPersonState createState() => _NbPersonState();
 }
@@ -44,19 +46,19 @@ class _NbPersonState extends State<NbPerson> {
     super.initState();
   }
 
-  Future<List<Person>> sqliteDb() async {
+  Future<List<Person>> sqliteDb(String searchValue) async {
     WidgetsFlutterBinding.ensureInitialized();
     GlobalDb globalDb;
     globalDb = new GlobalDb();
     await globalDb.initDb();
-    var personList = await globalDb.queryPerson();
+    var personList = await globalDb.queryPerson(searchValue);
     return personList;
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: sqliteDb(),
+        future: sqliteDb(widget.searchValue),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:

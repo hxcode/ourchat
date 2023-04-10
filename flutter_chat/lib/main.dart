@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat/homepage/appbar.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter_chat/homepage/person.dart';
 import 'package:flutter_chat/util/filePicker.dart';
 
@@ -40,22 +40,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String searchValue = '';
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    NbPerson(),
-    ExcelFilePicker(),
-  ];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      searchValue = '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var chatBar = ChatBar(widget.title);
+    List<Widget> _widgetOptions = <Widget>[
+      NbPerson(searchValue: this.searchValue),
+      ExcelFilePicker(),
+    ];
     return Scaffold(
-      appBar: chatBar.buildAppbar(),
+      appBar: EasySearchBar(
+        title: const Text('数据查看'),
+        onSearch: (value) => setState(() => searchValue = value),
+        // suggestions: _suggestions
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

@@ -69,12 +69,13 @@ class GlobalDb {
   }
 
   // A method that retrieves all the dogs from the dogs table.
-  Future<List<Person>> queryPerson() async {
+  Future<List<Person>> queryPerson(String searchValue) async {
     // Get a reference to the database.
     final db = database;
 
     // Query the table for all The Dogs.
-    final List<Map<String, dynamic>> maps = await db.query('person');
+    final List<Map<String, dynamic>> maps = await db.query('person',
+        where: 'name like ?', whereArgs: ['%' + searchValue + '%'], limit: 50);
 
     // Convert the List<Map<String, dynamic> into a List<Dog>.
     return List.generate(maps.length, (i) {
