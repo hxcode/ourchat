@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat/singlechat/singlechat.dart';
+import 'package:flutter_chat/personview/personview.dart';
 import 'package:flutter_chat/model/person.dart';
 import 'package:flutter_chat/util/sqlitedb.dart';
 
@@ -10,7 +10,7 @@ class Chats extends StatefulWidget {
 
 Route _createRoute(Person person) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => SingleChat(
+    pageBuilder: (context, animation, secondaryAnimation) => PersonView(
       person: person,
     ),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
