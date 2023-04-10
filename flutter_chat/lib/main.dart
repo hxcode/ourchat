@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat/homepage/appbar.dart';
 import 'package:flutter_chat/homepage/chats.dart';
 import 'package:flutter_chat/util/filePicker.dart';
-import 'package:flutter_chat/util/sqlitedb.dart';
 
 void main() {
-  // GlobalDb.initDb();
   runApp(MyApp());
 }
 

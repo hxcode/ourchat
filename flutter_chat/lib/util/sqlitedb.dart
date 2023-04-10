@@ -5,24 +5,24 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:developer';
 
 class GlobalDb {
-  static late Database database;
-  static Future<String> get _localPath async {
+  late Database database;
+  Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
 
     return directory.path;
   }
 
-  static Database get getDatabase {
-    return database;
+  Database get getDatabase {
+    return this.database;
   }
 
-  static Future<void> initDb() async {
+  Future<void> initDb() async {
     // Avoid errors caused by flutter upgrade.
     // Importing 'package:flutter/widgets.dart' is required.
 
     var joinPath = await _localPath;
     log('joinPath: $joinPath');
-    database = await openDatabase(
+    this.database = await openDatabase(
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
@@ -55,7 +55,7 @@ class GlobalDb {
   // Define a function that inserts person into the database
   Future<void> insertPerson(Person person) async {
     // Get a reference to the database.
-    final db = database;
+    final db = this.database;
 
     // Insert the Dog into the correct table. You might also specify the
     // `conflictAlgorithm` to use in case the same dog is inserted twice.

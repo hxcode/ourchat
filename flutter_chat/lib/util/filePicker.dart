@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_chat/model/person.dart';
 // import 'package:path/path.dart' as Path;
 import 'package:excel/excel.dart';
+import 'package:flutter_chat/util/sqlitedb.dart';
 
 class ExcelFilePicker extends StatefulWidget {
   @override
@@ -72,11 +73,17 @@ class _ExcelFilePickerState extends State<ExcelFilePicker> {
                 row[7]!.value.toString(),
                 row[8]!.value.toString(),
               ));
-              print(personList);
             }
           }
         }
         print(personList);
+        GlobalDb globalDb;
+        globalDb = new GlobalDb();
+        await globalDb.initDb();
+
+        for (var person in personList) {
+          await globalDb.insertPerson(person);
+        }
       }
     } on PlatformException catch (e) {
       _logException('Unsupported operation' + e.toString());

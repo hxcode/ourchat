@@ -19,6 +19,7 @@ dependencies:
   path_provider:
   file_picker: ^5.2.7
   excel: ^2.1.0
+  json_annotation:
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,7 @@ dev_dependencies:
   path_provider:
   file_picker: ^5.2.7
   excel: ^2.1.0
+  json_annotation: 
 
 flutter:
 
