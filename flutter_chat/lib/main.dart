@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/homepage/appbar.dart';
-import 'package:flutter_chat/homepage/chats.dart';
+import 'package:flutter_chat/homepage/person.dart';
 import 'package:flutter_chat/util/filePicker.dart';
 
 void main() {
@@ -42,7 +42,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
-    Chats(),
+    NbPerson(),
     ExcelFilePicker(),
   ];
   void _onItemTapped(int index) {

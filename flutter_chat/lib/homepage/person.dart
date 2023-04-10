@@ -3,9 +3,9 @@ import 'package:flutter_chat/personview/personview.dart';
 import 'package:flutter_chat/model/person.dart';
 import 'package:flutter_chat/util/sqlitedb.dart';
 
-class Chats extends StatefulWidget {
+class NbPerson extends StatefulWidget {
   @override
-  _ChatsState createState() => _ChatsState();
+  _NbPersonState createState() => _NbPersonState();
 }
 
 Route _createRoute(Person person) {
@@ -19,7 +19,7 @@ Route _createRoute(Person person) {
   );
 }
 
-class _ChatsState extends State<Chats> {
+class _NbPersonState extends State<NbPerson> {
   ListTile _tile(Person person, IconData icon) => ListTile(
         title: Text(person.name,
             style: TextStyle(
