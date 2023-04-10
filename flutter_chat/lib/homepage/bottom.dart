@@ -15,28 +15,14 @@ class Bottom {
               Icons.message_outlined,
               color: Colors.black,
             ),
-            label: "Chats",
+            label: "人才",
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.people_outline,
               color: Colors.black,
             ),
-            label: "Contacts",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.child_care_outlined,
-              color: Colors.black,
-            ),
-            label: "Discover",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline,
-              color: Colors.black,
-            ),
-            label: "Me",
+            label: "上传",
           ),
         ],
       );

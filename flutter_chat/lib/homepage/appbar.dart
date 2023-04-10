@@ -20,10 +20,10 @@ class ChatBar {
             icon: Icon(Icons.search),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Icon(Icons.add_circle_outline_rounded),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.add_circle_outline_rounded),
+          //   onPressed: () {},
+          // ),
         ],
       );
 }
