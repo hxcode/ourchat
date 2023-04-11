@@ -21,6 +21,7 @@ dependencies:
   excel: ^2.1.0
   json_annotation:
   easy_search_bar: ^2.4.2
+  intl:
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +33,7 @@ dev_dependencies:
   excel: ^2.1.0
   json_annotation: 
   easy_search_bar: ^2.4.2
+  intl:
 
 flutter:
 

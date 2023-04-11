@@ -3,6 +3,7 @@ import 'package:path/path.dart' as Path;
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:developer';
+import 'package:intl/intl.dart';
 
 class GlobalDb {
   late Database database;
@@ -74,17 +75,44 @@ class GlobalDb {
     final db = database;
 
     // Query the table for all The Dogs.
-    final List<Map<String, dynamic>> maps = await db.query('person',
+    List<Map<String, dynamic>> maps = await db.query('person',
         where: 'name like ?', whereArgs: ['%' + searchValue + '%'], limit: 50);
-
+    //Query condition
+    var queryColumn = [
+      'politicalStatus',
+      'workPosition',
+      'city',
+      'telephone',
+      'groupType',
+      'dateOfBirth'
+    ];
+    for (var column in queryColumn) {
+      if (maps.length > 0) {
+        break;
+      }
+      maps = await db.query('person',
+          where: column + ' like ?',
+          whereArgs: ['%' + searchValue + '%'],
+          limit: 50);
+    }
     // Convert the List<Map<String, dynamic> into a List<Dog>.
+    var inputFormat = DateFormat('yyyy-MM-ddTHH:mm:ss.SSS');
+    var outputFormat = DateFormat('yyyy-MM-dd');
     return List.generate(maps.length, (i) {
+      var dateOfBirth = maps[i]['dateOfBirth'];
+      if (dateOfBirth.length > 20) {
+        var inputDate =
+            inputFormat.parse(maps[i]['dateOfBirth']); // <-- dd/MM 24H format
+        dateOfBirth = outputFormat.format(inputDate);
+        print(dateOfBirth);
+      }
+
       return Person(
           maps[i]['orderNo'],
           maps[i]['name'],
           maps[i]['gender'],
           maps[i]['politicalStatus'],
-          maps[i]['dateOfBirth'],
+          dateOfBirth,
           maps[i]['workPosition'],
           maps[i]['city'],
           maps[i]['telephone'],
