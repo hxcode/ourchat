@@ -22,7 +22,7 @@ class GlobalDb {
     // Importing 'package:flutter/widgets.dart' is required.
 
     var joinPath = await _localPath;
-    log('joinPath: $joinPath');
+    // log('joinPath: $joinPath');
     this.database = await openDatabase(
       // Set the path to the database. Note: Using the `join` function from the
       // `path` package is best practice to ensure the path is correctly
@@ -104,7 +104,6 @@ class GlobalDb {
         var inputDate =
             inputFormat.parse(maps[i]['dateOfBirth']); // <-- dd/MM 24H format
         dateOfBirth = outputFormat.format(inputDate);
-        print(dateOfBirth);
       }
 
       return Person(
