@@ -84,6 +84,7 @@ class GlobalDb {
       'groupType',
       'dateOfBirth'
     ];
+    //页面查询条件：全部条件
     String concatWhere = conditionColumn.reduce((value, element) {
       if (value == 'name') {
         return value + ' like ?' + ' or ' + element + ' like ?';
@@ -96,10 +97,12 @@ class GlobalDb {
     // Query the table for all The Dogs.
     List<Map<String, dynamic>> maps = await db.query('person',
         where: concatWhere, whereArgs: conditionArgs, limit: 50);
+    //页面查询条件：所属城市
     if (selectedCondition == 'city') {
       maps = await db.query('person',
           where: 'city like ?', whereArgs: [conditionArgs[0]], limit: 50);
     }
+    //页面查询条件：所属界别
     if (selectedCondition == 'groupType') {
       maps = await db.query('person',
           where: 'groupType like ?', whereArgs: [conditionArgs[0]], limit: 50);

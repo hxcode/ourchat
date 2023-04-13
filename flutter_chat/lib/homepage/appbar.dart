@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class NbPersonBar {
   String title;
 
-  NbPersonBar(this.title) {}
+  NbPersonBar(this.title);
 
   AppBar buildAppbar() => AppBar(
         toolbarHeight: 48.0,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Bottom {
   int _selectedIndex = 0;
-  Bottom() {}
+  Bottom();
   void _onItemTapped(int index) {}
   BottomNavigationBar bottomNavigationBar() => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
