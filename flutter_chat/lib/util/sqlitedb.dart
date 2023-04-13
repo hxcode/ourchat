@@ -84,16 +84,18 @@ class GlobalDb {
       'groupType',
       'dateOfBirth'
     ];
-    var conditionArgs = [];
-    for (var column in conditionColumn) {
-      conditionArgs.add('%' + searchValue + '%');
-    }
+    String concatWhere = conditionColumn.reduce((value, element) {
+      if (value == 'name') {
+        return value + ' like ?' + ' or ' + element + ' like ?';
+      } else {
+        return value + ' or ' + element + ' like ?';
+      }
+    });
+    List<String> conditionArgs = List.generate(
+        conditionColumn.length, (index) => '%' + searchValue + '%');
     // Query the table for all The Dogs.
     List<Map<String, dynamic>> maps = await db.query('person',
-        where:
-            'name like ? or politicalStatus like ? or workPosition like ? or city like ? or telephone like ? or groupType like ? or dateOfBirth like ?',
-        whereArgs: conditionArgs,
-        limit: 50);
+        where: concatWhere, whereArgs: conditionArgs, limit: 50);
     if (selectedCondition == 'city') {
       maps = await db.query('person',
           where: 'city like ?', whereArgs: [conditionArgs[0]], limit: 50);
