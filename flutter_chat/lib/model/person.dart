@@ -10,25 +10,15 @@ class Person {
   late String groupType;
 
   Person(
-      int orderNo,
-      String name,
-      String gender,
-      String politicalStatus,
-      String dateOfBirth,
-      String workPosition,
-      String city,
-      String telephone,
-      String groupType) {
-    this.orderNo = orderNo;
-    this.name = name;
-    this.gender = gender;
-    this.politicalStatus = politicalStatus;
-    this.dateOfBirth = dateOfBirth;
-    this.workPosition = workPosition;
-    this.city = city;
-    this.telephone = telephone;
-    this.groupType = groupType;
-  }
+      {required this.orderNo,
+      required this.name,
+      required this.gender,
+      required this.politicalStatus,
+      required this.dateOfBirth,
+      required this.workPosition,
+      required this.city,
+      required this.telephone,
+      required this.groupType});
 
   int get getOrderNo {
     return orderNo;

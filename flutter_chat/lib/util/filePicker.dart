@@ -62,16 +62,16 @@ class _ExcelFilePickerState extends State<ExcelFilePicker> {
               if (row[0]!.value.toString() == '序号') {
                 continue;
               }
-              personList.add(new Person(
-                row[0]!.value,
-                row[1]!.value.toString(),
-                row[2]!.value.toString(),
-                row[3]!.value.toString(),
-                row[4]!.value.toString(),
-                row[5]!.value.toString(),
-                row[6]!.value.toString(),
-                row[7]!.value.toString(),
-                row[8]!.value.toString(),
+              personList.add(Person(
+                orderNo: row[0]!.value,
+                name: row[1]!.value.toString(),
+                gender: row[2]!.value.toString(),
+                politicalStatus: row[3]!.value.toString(),
+                dateOfBirth: row[4]!.value.toString(),
+                workPosition: row[5]!.value.toString(),
+                city: row[6]!.value.toString(),
+                telephone: row[7]!.value.toString(),
+                groupType: row[8]!.value.toString(),
               ));
             }
           }

@@ -70,15 +70,13 @@ class GlobalDb {
   }
 
   // A method that retrieves all the dogs from the dogs table.
-  Future<List<Person>> queryPerson(String searchValue) async {
+  Future<List<Person>> queryPerson(
+      String selectedCondition, String searchValue) async {
     // Get a reference to the database.
     final db = database;
-
-    // Query the table for all The Dogs.
-    List<Map<String, dynamic>> maps = await db.query('person',
-        where: 'name like ?', whereArgs: ['%' + searchValue + '%'], limit: 50);
     //Query condition
-    var queryColumn = [
+    var conditionColumn = [
+      'name',
       'politicalStatus',
       'workPosition',
       'city',
@@ -86,14 +84,23 @@ class GlobalDb {
       'groupType',
       'dateOfBirth'
     ];
-    for (var column in queryColumn) {
-      if (maps.length > 0) {
-        break;
-      }
+    var conditionArgs = [];
+    for (var column in conditionColumn) {
+      conditionArgs.add('%' + searchValue + '%');
+    }
+    // Query the table for all The Dogs.
+    List<Map<String, dynamic>> maps = await db.query('person',
+        where:
+            'name like ? or politicalStatus like ? or workPosition like ? or city like ? or telephone like ? or groupType like ? or dateOfBirth like ?',
+        whereArgs: conditionArgs,
+        limit: 50);
+    if (selectedCondition == 'city') {
       maps = await db.query('person',
-          where: column + ' like ?',
-          whereArgs: ['%' + searchValue + '%'],
-          limit: 50);
+          where: 'city like ?', whereArgs: [conditionArgs[0]], limit: 50);
+    }
+    if (selectedCondition == 'groupType') {
+      maps = await db.query('person',
+          where: 'groupType like ?', whereArgs: [conditionArgs[0]], limit: 50);
     }
     // Convert the List<Map<String, dynamic> into a List<Dog>.
     var inputFormat = DateFormat('yyyy-MM-ddTHH:mm:ss.SSS');
@@ -107,15 +114,15 @@ class GlobalDb {
       }
 
       return Person(
-          maps[i]['orderNo'],
-          maps[i]['name'],
-          maps[i]['gender'],
-          maps[i]['politicalStatus'],
-          dateOfBirth,
-          maps[i]['workPosition'],
-          maps[i]['city'],
-          maps[i]['telephone'],
-          maps[i]['groupType']);
+          orderNo: maps[i]['orderNo'],
+          name: maps[i]['name'],
+          gender: maps[i]['gender'],
+          politicalStatus: maps[i]['politicalStatus'],
+          dateOfBirth: dateOfBirth,
+          workPosition: maps[i]['workPosition'],
+          city: maps[i]['city'],
+          telephone: maps[i]['telephone'],
+          groupType: maps[i]['groupType']);
     });
   }
 }

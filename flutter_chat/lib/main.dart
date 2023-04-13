@@ -40,23 +40,45 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String selectedCondtion = '';
   String searchValue = '';
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
       searchValue = '';
+      selectedCondtion = '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      NbPerson(searchValue: this.searchValue),
+      NbPerson(
+        searchValue: this.searchValue,
+        selectedCondition: this.selectedCondtion,
+      ),
       ExcelFilePicker(),
     ];
     return Scaffold(
       appBar: EasySearchBar(
+        actions: [
+          new DropdownButton<String>(
+            value: selectedCondtion,
+            items: <DropdownMenuItem<String>>[
+              new DropdownMenuItem(
+                child: new Text('全部条件'),
+                value: '',
+              ),
+              new DropdownMenuItem(child: new Text('现居城市'), value: 'city'),
+              new DropdownMenuItem(child: new Text('所属界别'), value: 'groupType'),
+            ],
+            onChanged: (String? value) {
+              setState(() => selectedCondtion = (value as String));
+            },
+          )
+        ],
+
         title: const Text('数据查看'),
         onSearch: (value) => setState(() => searchValue = value),
         // suggestions: _suggestions

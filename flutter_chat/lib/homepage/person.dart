@@ -4,8 +4,9 @@ import 'package:flutter_chat/model/person.dart';
 import 'package:flutter_chat/util/sqlitedb.dart';
 
 class NbPerson extends StatefulWidget {
+  final String selectedCondition;
   final String searchValue;
-  NbPerson({required this.searchValue});
+  NbPerson({required this.searchValue, required this.selectedCondition});
   @override
   _NbPersonState createState() => _NbPersonState();
 }
@@ -23,16 +24,18 @@ Route _createRoute(Person person) {
 
 class _NbPersonState extends State<NbPerson> {
   ListTile _tile(Person person, IconData icon) => ListTile(
+        // isThreeLine: true,
         title: Text(person.name,
             style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
+              fontWeight: FontWeight.w300,
+              fontSize: 15,
             )),
         subtitle: Text(person.workPosition),
-        leading: Icon(
-          icon,
-          color: Colors.blue[500],
-        ),
+        leading: Text(person.groupType,
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+              fontSize: 12,
+            )),
         trailing: Text(
           person.telephone,
           style: TextStyle(color: Colors.grey),
@@ -46,19 +49,20 @@ class _NbPersonState extends State<NbPerson> {
     super.initState();
   }
 
-  Future<List<Person>> sqliteDb(String searchValue) async {
+  Future<List<Person>> sqliteDb(
+      String selectedCondtion, String searchValue) async {
     WidgetsFlutterBinding.ensureInitialized();
     GlobalDb globalDb;
     globalDb = new GlobalDb();
     await globalDb.initDb();
-    var personList = await globalDb.queryPerson(searchValue);
+    var personList = await globalDb.queryPerson(selectedCondtion, searchValue);
     return personList;
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: sqliteDb(widget.searchValue),
+        future: sqliteDb(widget.selectedCondition, widget.searchValue),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
