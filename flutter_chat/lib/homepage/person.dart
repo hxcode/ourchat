@@ -78,7 +78,7 @@ class _NbPersonState extends State<NbPerson> {
                 return ListView.separated(
                   itemCount: chatList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return chatList[index];
+                    return Card(child: chatList[index]);
                   },
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(

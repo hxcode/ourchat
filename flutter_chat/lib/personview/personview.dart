@@ -44,6 +44,7 @@ class PersonView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
+        backgroundColor: Colors.blue,
         title: Text(
           this.person.name,
           style: TextStyle(color: Colors.black),
@@ -59,11 +60,17 @@ class PersonView extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Stack(
           children: <Widget>[
-            ListView.builder(
+            ListView.separated(
               itemCount: props.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 10),
               // physics: NeverScrollableScrollPhysics(),
+              separatorBuilder: (context, index) {
+                return Divider(
+                  height: 1.0,
+                  color: Colors.blueGrey[400], // 分隔线颜色
+                );
+              },
               itemBuilder: (context, index) {
                 return Container(
                   padding:

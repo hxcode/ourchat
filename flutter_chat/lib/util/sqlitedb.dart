@@ -1,4 +1,5 @@
 import 'package:flutter_chat/model/person.dart';
+import 'package:flutter_chat/model/sortCondition.dart';
 import 'package:path/path.dart' as Path;
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -114,6 +115,11 @@ class GlobalDb {
       maps = await db.query('person',
           where: 'groupType like ?', whereArgs: [conditionArgs[0]], limit: 50);
     }
+    //页面查询条件：所属行业
+    if (selectedCondition == 'industry') {
+      maps = await db.query('person',
+          where: 'industry like ?', whereArgs: [conditionArgs[0]], limit: 50);
+    }
     // Convert the List<Map<String, dynamic> into a List<Dog>.
     var inputFormat = DateFormat('yyyy-MM-ddTHH:mm:ss.SSS');
     var outputFormat = DateFormat('yyyy-MM-dd');
@@ -142,6 +148,22 @@ class GlobalDb {
           birthWhereContact: maps[i]['birthWhereContact'],
           birthWhereContactPhone: maps[i]['birthWhereContactPhone'],
           family: maps[i]['family']);
+    });
+  }
+
+  // A method that retrieves all the dogs from the dogs table.
+  Future<List<SortCondition>> querySortCondition(String sortColumn) async {
+    // Get a reference to the database.
+    final db = database;
+    //Query condition
+    // Query the table for all The Dogs.
+    List<Map<String, dynamic>> maps = await db.query('person',
+        columns: [sortColumn], groupBy: sortColumn, limit: 50);
+
+    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    return List.generate(maps.length, (i) {
+      return SortCondition(
+          type: sortColumn, name: maps[i][sortColumn], isSelected: false);
     });
   }
 }
