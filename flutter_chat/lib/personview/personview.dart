@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/model/person.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PersonView extends StatelessWidget {
   final Person person;
@@ -27,18 +28,23 @@ class PersonView extends StatelessWidget {
     var itemList = [];
     for (var key in props.keys) {
       itemList.add(ListTile(
-        leading: Text((props[key] as String) + ": ",
+          leading: Text((props[key] as String) + ": ",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+              )),
+          trailing: Text(
+            personMap[key],
             style: TextStyle(
-              color: Colors.grey,
-              fontSize: 20,
-            )),
-        trailing: Text(
-          personMap[key],
-          style: TextStyle(
-            fontWeight: FontWeight.w300,
+              fontWeight: FontWeight.w300,
+            ),
           ),
-        ),
-      ));
+          onTap: () {
+            if (key == 'telephone' || key == 'birthWhereContactPhone') {
+              final uri = Uri.parse('tel://' + personMap[key]);
+              launchUrl(uri);
+            }
+          }));
     }
 
     return Scaffold(
