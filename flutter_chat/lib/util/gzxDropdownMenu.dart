@@ -5,10 +5,8 @@ import 'package:flutter_chat/model/sortCondition.dart';
 import 'package:flutter_chat/util/sqlitedb.dart';
 
 class GZXDropDownMenuWidget extends StatefulWidget {
-  String selectedCondition;
-  String searchValue;
-  GZXDropDownMenuWidget(
-      {required this.searchValue, required this.selectedCondition});
+  GlobalKey<ScaffoldState> scaffoldKey;
+  GZXDropDownMenuWidget({required this.scaffoldKey});
   @override
   _GZXDropDownMenuWidgetState createState() => _GZXDropDownMenuWidgetState();
 }
@@ -26,7 +24,6 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
   GZXDropdownMenuController _dropdownMenuController =
       GZXDropdownMenuController();
 
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
   GlobalKey _stackKey = GlobalKey();
 
   String _dropdownMenuChange = '';
@@ -114,7 +111,7 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
               onItemTap: (index) {
                 if (index == 3) {
                   _dropdownMenuController.hide();
-                  // _scaffoldKey.currentState!.openEndDrawer();
+                  widget.scaffoldKey.currentState!.openEndDrawer();
                 }
               },
               style: TextStyle(color: Color(0xFF666666), fontSize: 14),

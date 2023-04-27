@@ -57,10 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      GZXDropDownMenuWidget(
-        searchValue: this.searchValue,
-        selectedCondition: this.selectedCondtion,
-      ),
+      GZXDropDownMenuWidget(scaffoldKey: this._scaffoldKey),
       ExcelFilePicker(),
     ];
     return Scaffold(
@@ -96,6 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      endDrawer: Container(
+        margin: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width / 4, top: 0),
+        color: Colors.white,
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
