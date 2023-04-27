@@ -41,7 +41,7 @@ class PersonView extends StatelessWidget {
           ),
           onTap: () {
             if (key == 'telephone' || key == 'birthWhereContactPhone') {
-              final uri = Uri.parse('tel://' + personMap[key]);
+              final uri = Uri(scheme: 'tel', path: personMap[key]);
               launchUrl(uri);
             }
           }));
