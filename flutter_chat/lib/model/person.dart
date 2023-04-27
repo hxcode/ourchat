@@ -8,6 +8,13 @@ class Person {
   late String city;
   late String telephone;
   late String groupType;
+  late String industry;
+  late String techLevel;
+  late String topSchool;
+  late String birthWhere;
+  late String birthWhereContact;
+  late String birthWhereContactPhone;
+  late String family;
 
   Person(
       {required this.orderNo,
@@ -18,7 +25,14 @@ class Person {
       required this.workPosition,
       required this.city,
       required this.telephone,
-      required this.groupType});
+      required this.groupType,
+      required this.industry,
+      required this.techLevel,
+      required this.topSchool,
+      required this.birthWhere,
+      required this.birthWhereContact,
+      required this.birthWhereContactPhone,
+      required this.family});
 
   int get getOrderNo {
     return orderNo;
@@ -68,7 +82,14 @@ class Person {
       'workPosition': workPosition,
       'telephone': telephone,
       'city': city,
-      'groupType': groupType
+      'groupType': groupType,
+      'industry': industry,
+      'techLevel': techLevel,
+      'topSchool': topSchool,
+      'birthWhere': birthWhere,
+      'birthWhereContact': birthWhereContact,
+      'birthWhereContactPhone': birthWhereContactPhone,
+      'family': family
     };
   }
 }

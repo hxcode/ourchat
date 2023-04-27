@@ -63,16 +63,22 @@ class _ExcelFilePickerState extends State<ExcelFilePicker> {
                 continue;
               }
               personList.add(Person(
-                orderNo: row[0]!.value,
-                name: row[1]!.value.toString(),
-                gender: row[2]!.value.toString(),
-                politicalStatus: row[3]!.value.toString(),
-                dateOfBirth: row[4]!.value.toString(),
-                workPosition: row[5]!.value.toString(),
-                city: row[6]!.value.toString(),
-                telephone: row[7]!.value.toString(),
-                groupType: row[8]!.value.toString(),
-              ));
+                  orderNo: row[0]!.value,
+                  name: row[1]!.value.toString(),
+                  gender: row[2]!.value.toString(),
+                  politicalStatus: row[3]!.value.toString(),
+                  dateOfBirth: row[4]!.value.toString(),
+                  workPosition: row[5]!.value.toString(),
+                  industry: row[6]!.value.toString(),
+                  techLevel: row[7]!.value.toString(),
+                  city: row[8]!.value.toString(),
+                  telephone: row[9]!.value.toString(),
+                  groupType: row[10]!.value.toString(),
+                  topSchool: row[11]!.value.toString(),
+                  birthWhere: row[12]!.value.toString(),
+                  birthWhereContact: row[13]!.value.toString(),
+                  birthWhereContactPhone: row[14]!.value.toString(),
+                  family: row[15]!.value.toString()));
             }
           }
         }

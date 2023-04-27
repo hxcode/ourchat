@@ -15,6 +15,13 @@ class PersonView extends StatelessWidget {
       'workPosition': '工作单位及职务',
       'city': '现居城市',
       'telephone': '联系方式',
+      'industry': '行业',
+      'techLevel': '职称级别/技能等级',
+      'topSchool': '最高学历',
+      'birthWhere': '出生地',
+      'birthWhereContact': '家乡联系人',
+      'birthWhereContactPhone': '家乡联系人电话',
+      'family': '家庭情况',
     };
     var personMap = person.toMap();
     var itemList = [];
@@ -56,7 +63,7 @@ class PersonView extends StatelessWidget {
               itemCount: props.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 10),
-              physics: NeverScrollableScrollPhysics(),
+              // physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Container(
                   padding:

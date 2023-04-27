@@ -28,7 +28,7 @@ class GlobalDb {
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
 
-      Path.join(joinPath, 'person.db'),
+      Path.join(joinPath, 'person_20230427.db'),
       // When the database is first created, create a table to store dogs.
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
@@ -42,7 +42,14 @@ class GlobalDb {
             workPosition TEXT,
             city TEXT,
             telephone TEXT,
-            groupType TEXT
+            groupType TEXT,
+            industry TEXT,
+            techLevel TEXT,
+            topSchool TEXT,
+            birthWhere TEXT,
+            birthWhereContact TEXT,
+            birthWhereContactPhone TEXT,
+            family TEXT
              )
            ''',
         );
@@ -127,7 +134,14 @@ class GlobalDb {
           workPosition: maps[i]['workPosition'],
           city: maps[i]['city'],
           telephone: maps[i]['telephone'],
-          groupType: maps[i]['groupType']);
+          groupType: maps[i]['groupType'],
+          industry: maps[i]['industry'],
+          techLevel: maps[i]['techLevel'],
+          topSchool: maps[i]['topSchool'],
+          birthWhere: maps[i]['birthWhere'],
+          birthWhereContact: maps[i]['birthWhereContact'],
+          birthWhereContactPhone: maps[i]['birthWhereContactPhone'],
+          family: maps[i]['family']);
     });
   }
 }
