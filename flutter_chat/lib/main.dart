@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:easy_search_bar/easy_search_bar.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 // import 'package:flutter_chat/homepage/person.dart';
 import 'package:flutter_chat/util/filePicker.dart';
 import 'package:flutter_chat/util/gzxDropdownMenu.dart';
@@ -57,40 +57,49 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      GZXDropDownMenuWidget(scaffoldKey: this._scaffoldKey),
+      GZXDropDownMenuWidget(
+          scaffoldKey: this._scaffoldKey,
+          searchValue: this.searchValue,
+          searchCondition: ''),
       ExcelFilePicker(),
     ];
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.blueGrey[50],
-      // appBar: EasySearchBar(
-      //   actions: [
-      //     new DropdownButton<String>(
-      //       value: selectedCondtion,
-      //       items: <DropdownMenuItem<String>>[
-      //         new DropdownMenuItem(
-      //           child: new Text('全部条件'),
-      //           value: '',
-      //         ),
-      //         new DropdownMenuItem(child: new Text('现居城市'), value: 'city'),
-      //         new DropdownMenuItem(child: new Text('所属界别'), value: 'groupType'),
-      //       ],
-      //       onChanged: (String? value) {
-      //         setState(() => selectedCondtion = (value as String));
-      //       },
-      //     )
-      //   ],
-
-      //   title: const Text('数据查看'),
-      //   onSearch: (value) => setState(() => searchValue = value),
-      //   // suggestions: _suggestions
-      // ),
-      appBar: AppBar(
-        centerTitle: true,
-        toolbarHeight: 36.0, // 设置高度
+      appBar: EasySearchBar(
+        // appBarHeight: 40.0, // 设置高度
         backgroundColor: Colors.blue,
-        title: const Text('数据查看'),
+        // actions: [
+        //   new DropdownButton<String>(
+        //     value: selectedCondtion,
+        //     items: <DropdownMenuItem<String>>[
+        //       new DropdownMenuItem(
+        //         child: new Text('全部条件'),
+        //         value: '',
+        //       ),
+        //       new DropdownMenuItem(child: new Text('现居城市'), value: 'city'),
+        //       new DropdownMenuItem(child: new Text('所属界别'), value: 'groupType'),
+        //     ],
+        //     onChanged: (String? value) {
+        //       setState(() => selectedCondtion = (value as String));
+        //     },
+        //   )
+        // ],
+
+        title: Center(
+            child: Text(
+          '数据查看',
+          // style: TextStyle(fontSize: 12),
+        )),
+        onSearch: (value) => setState(() => searchValue = value),
+        // suggestions: _suggestions
       ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   toolbarHeight: 36.0, // 设置高度
+      //   backgroundColor: Colors.blue,
+      //   title: const Text('数据查看'),
+      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

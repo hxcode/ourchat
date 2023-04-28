@@ -6,13 +6,19 @@ import 'package:flutter_chat/util/sqlitedb.dart';
 
 class GZXDropDownMenuWidget extends StatefulWidget {
   GlobalKey<ScaffoldState> scaffoldKey;
-  GZXDropDownMenuWidget({required this.scaffoldKey});
+  late String searchValue;
+  String searchCondition = '';
+  GZXDropDownMenuWidget(
+      {required this.scaffoldKey,
+      required this.searchValue,
+      required this.searchCondition});
   @override
   _GZXDropDownMenuWidgetState createState() => _GZXDropDownMenuWidgetState();
 }
 
 class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
-  List<String> _dropDownHeaderItemStrings = ['行业', '城市', '界别', '筛选'];
+  List<String> _dropDownHeaderItemStrings = ['行业', '居住地', '界别', '筛选'];
+  final List<String> _headerItemStrings = ['行业', '居住地', '界别', '筛选'];
   List<SortCondition> _industrySortConditions = [];
   List<SortCondition> _citySortConditions = [];
   List<SortCondition> _groupTypeConditions = [];
@@ -38,30 +44,30 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
       await globalDb.initDb();
       _industrySortConditions = await globalDb.querySortCondition('industry');
       _industrySortConditions.insert(
-          0, SortCondition(name: '全部', type: 'industry', isSelected: true));
+          0, SortCondition(name: '行业', type: 'industry', isSelected: true));
       _selectIndustrySortCondition = _industrySortConditions[0];
 
       _citySortConditions = await globalDb.querySortCondition('city');
       _citySortConditions.insert(
-          0, SortCondition(name: '全部', type: 'city', isSelected: true));
+          0, SortCondition(name: '居住地', type: 'city', isSelected: true));
       _selectCitySortCondition = _citySortConditions[0];
 
       _groupTypeConditions = await globalDb.querySortCondition('groupType');
       _groupTypeConditions.insert(
-          0, SortCondition(name: '全部', type: 'groupType', isSelected: true));
+          0, SortCondition(name: '界别', type: 'groupType', isSelected: true));
       _selectGroupTypeCondition = _groupTypeConditions[0];
 
       setState(() {
+        _selectCondition.name = widget.searchValue;
         // Update your UI with the desired changes.
       });
     }();
   }
 
-  void setSelected(List<SortCondition> items, SortCondition selectItem,
-      int index, String search) {
+  void setSelected(
+      List<SortCondition> items, SortCondition selectItem, int index) {
     selectItem = items[0];
-    _dropDownHeaderItemStrings[index] =
-        _selectIndustrySortCondition.name == '全部' ? search : selectItem.name;
+    _dropDownHeaderItemStrings[index] = selectItem.name;
     for (SortCondition value in items) {
       value.isSelected = false;
     }
@@ -97,11 +103,11 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
                   iconData: Icons.keyboard_arrow_down,
                   iconDropDownData: Icons.keyboard_arrow_up,
                 ),
-                GZXDropDownHeaderItem(
-                  _dropDownHeaderItemStrings[3],
-                  iconData: Icons.filter_frames,
-                  iconSize: 18,
-                ),
+                // GZXDropDownHeaderItem(
+                //   _dropDownHeaderItemStrings[3],
+                //   iconData: Icons.filter_frames,
+                //   iconSize: 18,
+                // ),
               ],
               // GZXDropDownHeader对应第一父级Stack的key
               stackKey: _stackKey,
@@ -129,9 +135,8 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
             ),
             Expanded(
               child: NbPerson(
-                searchValue:
-                    _selectCondition.name == '全部' ? '' : _selectCondition.name,
-                selectedCondition: _selectCondition.type,
+                searchValue: widget.searchValue,
+                selectedCondition: widget.searchCondition,
               ),
             ),
           ],
@@ -165,15 +170,13 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
                     _buildConditionListWidget(_industrySortConditions, (value) {
                   _selectIndustrySortCondition = value;
                   _dropDownHeaderItemStrings[0] =
-                      _selectIndustrySortCondition.name == '全部'
-                          ? '行业'
-                          : _selectIndustrySortCondition.name;
+                      _selectIndustrySortCondition.name;
                   _dropdownMenuController.hide();
                   setState(() {
                     setSelected(
-                        _citySortConditions, _selectCitySortCondition, 1, '城市');
-                    setSelected(_groupTypeConditions, _selectGroupTypeCondition,
-                        2, '界别');
+                        _citySortConditions, _selectCitySortCondition, 1);
+                    setSelected(
+                        _groupTypeConditions, _selectGroupTypeCondition, 2);
                     this._selectCondition = _selectIndustrySortCondition;
                   });
                 })),
@@ -182,16 +185,13 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
                 dropDownWidget:
                     _buildConditionListWidget(_citySortConditions, (value) {
                   _selectCitySortCondition = value;
-                  _dropDownHeaderItemStrings[1] =
-                      _selectCitySortCondition.name == '全部'
-                          ? '城市'
-                          : _selectCitySortCondition.name;
+                  _dropDownHeaderItemStrings[1] = _selectCitySortCondition.name;
                   _dropdownMenuController.hide();
                   setState(() {
                     setSelected(_industrySortConditions,
-                        _selectIndustrySortCondition, 0, '行业');
-                    setSelected(_groupTypeConditions, _selectGroupTypeCondition,
-                        2, '界别');
+                        _selectIndustrySortCondition, 0);
+                    setSelected(
+                        _groupTypeConditions, _selectGroupTypeCondition, 2);
                     this._selectCondition = _selectCitySortCondition;
                   });
                 })),
@@ -201,15 +201,13 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
                     _buildConditionListWidget(_groupTypeConditions, (value) {
                   _selectGroupTypeCondition = value;
                   _dropDownHeaderItemStrings[2] =
-                      _selectGroupTypeCondition.name == '全部'
-                          ? '界别'
-                          : _selectGroupTypeCondition.name;
+                      _selectGroupTypeCondition.name;
                   _dropdownMenuController.hide();
                   setState(() {
                     setSelected(_industrySortConditions,
-                        _selectIndustrySortCondition, 0, '行业');
+                        _selectIndustrySortCondition, 0);
                     setSelected(
-                        _citySortConditions, _selectCitySortCondition, 1, '城市');
+                        _citySortConditions, _selectCitySortCondition, 1);
                     this._selectCondition = _selectGroupTypeCondition;
                   });
                 })),
@@ -244,6 +242,12 @@ class _GZXDropDownMenuWidgetState extends State<GZXDropDownMenuWidget> {
           value.isSelected = false;
         }
         goodsSortCondition.isSelected = true;
+        widget.searchValue =
+            _headerItemStrings.contains(goodsSortCondition.name)
+                ? ''
+                : goodsSortCondition.name;
+        widget.searchCondition = goodsSortCondition.type;
+        print(widget.searchValue);
 
         itemOnTap(goodsSortCondition);
       },
